@@ -4,6 +4,7 @@
 
 import uuid
 from datetime import datetime
+import models
 
 
 class BaseModel():
@@ -23,6 +24,7 @@ class BaseModel():
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            models.storage.new(self)
 
     def __str__(self):
         """The string representation of the BaseModel instance"""
@@ -32,6 +34,7 @@ class BaseModel():
         """Creates an updated version of the 'updated_at'
         instance with the current datetime"""
         self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """The dictionary representation of instance"""
